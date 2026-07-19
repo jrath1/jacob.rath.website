@@ -13,3 +13,4 @@ footer{max-width:1180px;margin:auto;padding:38px 6vw;display:flex;justify-conten
 body:has(.washscore-header) .page h1{font-size:clamp(2.3rem,4vw,4.2rem);margin-bottom:32px}body:has(.washscore-header) .page h2{font-size:1.15rem;margin-top:2.4rem}body:has(.washscore-header) .page p,body:has(.washscore-header) .page li{font-size:1rem}
 body:has(.washscore-header) .page li{color:var(--muted)}body:has(.washscore-header) .page li::marker{color:var(--muted)}
 .washscore-header nav a.active{font-weight:700}
+.support-form-section legend{display:none}
