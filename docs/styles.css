@@ -473,3 +473,8 @@ body:has(.washscore-header) .page li::marker {
 .support-form-section form label {
   font-size: 1.25rem;
 }
+.support-form-section .button {
+  min-width: 190px;
+  padding: 16px 34px;
+  font-size: .9rem;
+}
