@@ -14,3 +14,4 @@ body:has(.washscore-header) .page h1{font-size:clamp(2.3rem,4vw,4.2rem);margin-b
 body:has(.washscore-header) .page li{color:var(--muted)}body:has(.washscore-header) .page li::marker{color:var(--muted)}
 .washscore-header nav a.active{font-weight:700}.issues-toggle{line-height:1.4}.issues-toggle span{display:inline-flex;width:1.7rem;height:1.7rem;align-items:center;justify-content:center;line-height:1}
 .support-form-section legend{display:none}
+.form-error{color:#a33!important;font-size:.9rem!important;margin-top:18px}
