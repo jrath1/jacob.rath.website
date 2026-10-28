@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LawnScore Support — Jacob Rath</title>
+    <link rel="stylesheet" href="../styles.css?v=validation-20261028">
+  </head>
+  <body>
+    <header class="site-header washscore-header">
+      <div class="brand">Jacob Rath <span>UX/UI Designer</span></div>
+      <nav>
+        <a href="../lawnscore-privacy-policy/index.html">Privacy Policy</a>
+        <a class="active" aria-current="page" href="../lawnscore-support/index.html">Support</a>
+      </nav>
+    </header>
+    <main class="page support-page">
+      <h1>LawnScore Support</h1>
+      <section class="issues">
+        <button class="issues-toggle" type="button" aria-expanded="false" aria-controls="issues-content">Common Issues <span aria-hidden="true">＋</span></button>
+        <div id="issues-content" class="issues-content" hidden>
+          <ul>
+            <li>Ensure location services are enabled.</li>
+            <li>Refresh the forecast in Settings.</li>
+            <li>Check internet connectivity.</li>
+          </ul>
+        </div>
+      </section>
+      <section class="support-form-section">
+        <h2>Need help with LawnScore?</h2>
+        <form id="support-form" action="https://formspree.io/f/mykrwqpy" method="post" novalidate>
+          <div id="validation-summary" class="validation-summary" role="alert" tabindex="-1" hidden></div>
+          <fieldset>
+            <legend>Name</legend>
+            <div class="form-row">
+              <label>First Name <span>(required)</span><input name="first_name" required></label>
+              <label>Last Name <span>(required)</span><input name="last_name" required></label>
+            </div>
+          </fieldset>
+          <label>Email <span>(required)</span><input type="email" name="email" required></label>
+          <label>Subject <span>(required)</span><input name="subject" required></label>
+          <label>Message <span>(required)</span><textarea name="message" rows="7" required></textarea></label>
+          <button class="button" type="submit">Submit</button>
+        </form>
+        <div id="thank-you" class="thank-you" hidden><p>Thank you!</p></div>
+        <p id="form-error" class="form-error" hidden>We couldn’t send your message. Please try again.</p>
+      </section>
+    </main>
+    <footer><p>© <span data-current-year>2026</span> Jacob Rath · User Experience / User Interface Designer.</p></footer>
+    <script>
+      const toggle=document.querySelector('.issues-toggle'),content=document.querySelector('#issues-content');
+      toggle.addEventListener('click',()=>{const open=toggle.getAttribute('aria-expanded')==='true';toggle.setAttribute('aria-expanded',String(!open));content.hidden=open;toggle.querySelector('span').textContent=open?'＋':'−'});
+      const form=document.querySelector('#support-form'),thankYou=document.querySelector('#thank-you'),formError=document.querySelector('#form-error'),validationSummary=document.querySelector('#validation-summary');
+      const fields=[...form.querySelectorAll('input[required], textarea[required]')];
+      const fieldNames={first_name:'First Name',last_name:'Last Name',email:'Email',subject:'Subject',message:'Message'};
+      const clearFieldError=(field)=>{field.removeAttribute('aria-invalid');const error=document.querySelector(`#${field.name}-error`);if(error)error.remove();field.removeAttribute('aria-describedby')};
+      fields.forEach((field)=>field.addEventListener('input',()=>{clearFieldError(field);if(fields.every((item)=>item.checkValidity()))validationSummary.hidden=true}));
+      form.addEventListener('submit',async(event)=>{event.preventDefault();formError.hidden=true;validationSummary.hidden=true;fields.forEach(clearFieldError);const invalidFields=fields.filter((field)=>!field.checkValidity());if(invalidFields.length){invalidFields.forEach((field)=>{field.setAttribute('aria-invalid','true');const error=document.createElement('div');error.id=`${field.name}-error`;error.className='field-error';error.textContent=field.validity.valueMissing?`${fieldNames[field.name]} is required.`:'Please enter a valid email address.';field.insertAdjacentElement('beforebegin',error);field.setAttribute('aria-describedby',error.id)});validationSummary.textContent='Form submission failed. Review the following information: Name, Email, Subject, and Message.';validationSummary.hidden=false;validationSummary.focus();return}const button=form.querySelector('button[type="submit"]');button.disabled=true;try{const response=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{Accept:'application/json'}});if(!response.ok)throw new Error('Submission failed');form.hidden=true;thankYou.hidden=false}catch(error){formError.hidden=false;button.disabled=false}});
+    </script>
+    <script src="../year.js"></script>
+  </body>
+</html>
